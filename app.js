@@ -591,14 +591,22 @@ async function fetchPrayerTimes(){
     if($('kal-hijri-date')) $('kal-hijri-date').textContent=kalHijriDate;
     if($('kal-hijri-month')) $('kal-hijri-month').textContent=kalHijriMonth;
     if($('home-hijri')) $('home-hijri').textContent=hijriStr;
+    // Save cache immediately with coordinates (before geocode, so cache always gets saved)
+    try{ localStorage.setItem(CACHE_KEY,JSON.stringify({date:today,timings:state.prayerTimes,hijri:true,hijriStr,kalHijriDate,kalHijriMonth,location:state.prayerLocation})); }catch{}
+
+    // Try to enrich location name (non-blocking, update cache if successful)
     try{
       const geoRes=await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=id`);
       const geoData=await geoRes.json();
-      state.prayerLocation=geoData.city||geoData.locality||geoData.countryName||state.prayerLocation;
+      const cityName=geoData.city||geoData.locality||geoData.countryName;
+      if(cityName){
+        state.prayerLocation=cityName;
+        // Update cache with better location name
+        try{ localStorage.setItem(CACHE_KEY,JSON.stringify({date:today,timings:state.prayerTimes,hijri:true,hijriStr,kalHijriDate,kalHijriMonth,location:state.prayerLocation})); }catch{}
+      }
     }catch{}
     if($('sholat-location')) $('sholat-location').textContent=`📍 ${state.prayerLocation}`;
     if($('home-location')) $('home-location').textContent=`📍 ${state.prayerLocation}`;
-    try{ localStorage.setItem(CACHE_KEY,JSON.stringify({date:today,timings:state.prayerTimes,hijri:true,hijriStr,kalHijriDate,kalHijriMonth,location:state.prayerLocation})); }catch{}
     renderPrayerTimes(); startCountdown();
     $('loading-sholat').classList.add('hidden');
     $('sholat-list').classList.remove('hidden');
@@ -1052,8 +1060,8 @@ function init(){
       initPengaturan();
       const dayIdx=getDayOfYear()%DATA.hadiths.length;
       state.currentHadisIndex=dayIdx;
-      // Auto-load prayer if already on sholat page
-      if(state.currentPage==='sholat') fetchPrayerTimes();
+      // Fetch prayer times on startup so home countdown works immediately
+      fetchPrayerTimes();
     },500);
   },1800);
 }
