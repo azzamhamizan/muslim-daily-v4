@@ -1,0 +1,39 @@
+{
+  "name": "Muslim Daily - Toolkit Islami",
+  "short_name": "Muslim Daily",
+  "description": "Toolkit islami harian: jadwal sholat, arah kiblat, tasbih digital, dzikir harian, dan kalender Islam.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0a1628",
+  "theme_color": "#1E7F4B",
+  "orientation": "portrait-primary",
+  "scope": "./",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["lifestyle", "religion"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Jadwal Sholat",
+      "url": "./index.html#sholat",
+      "description": "Lihat jadwal sholat hari ini"
+    },
+    {
+      "name": "Tasbih",
+      "url": "./index.html#tasbih",
+      "description": "Buka tasbih digital"
+    }
+  ]
+}

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="description" content="Muslim Daily - Toolkit islami harian lengkap: jadwal sholat, kiblat, tasbih, dzikir, Al-Qur'an, streak ibadah, kalender Islam." />
+  <meta name="theme-color" content="#1E7F4B" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Muslim Daily" />
+  <title>Muslim Daily - Toolkit Islami</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ============ SPLASH ============ -->
+<div id="splash-screen" class="splash">
+  <div class="splash-content">
+    <div class="splash-icon">☪</div>
+    <h1 class="splash-title">Muslim Daily</h1>
+    <p class="splash-sub">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
+    <div class="splash-loader"><div class="loader-bar"></div></div>
+  </div>
+</div>
+
+<!-- ============ APP SHELL ============ -->
+<div id="app" class="app hidden">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <span class="topbar-logo">☪</span>
+      <span class="topbar-title">Muslim Daily</span>
+    </div>
+    <div class="topbar-right">
+      <button id="dark-mode-toggle" class="icon-btn" aria-label="Toggle tema">
+        <span class="icon-moon">🌙</span>
+      </button>
+      <button id="install-btn" class="icon-btn hidden" aria-label="Install app">⬇</button>
+    </div>
+  </header>
+
+  <!-- PAGES -->
+  <main class="pages-container">
+
+    <!-- ===================================================== -->
+    <!-- HOME PAGE -->
+    <!-- ===================================================== -->
+    <section id="page-home" class="page active">
+
+      <!-- HERO -->
+      <div class="home-hero">
+        <div class="hero-top">
+          <div class="hero-greeting">
+            <p class="greeting-arabic">السَّلَامُ عَلَيْكُمْ</p>
+            <h2 class="greeting-text" id="greeting-text">Assalamu'alaikum</h2>
+            <p class="greeting-name" id="greeting-name">Muslim</p>
+          </div>
+          <div class="hero-meta">
+            <p class="hero-date" id="home-date">—</p>
+            <p class="hero-hijri" id="home-hijri">—</p>
+            <p class="hero-location" id="home-location">📍 —</p>
+          </div>
+        </div>
+
+        <!-- Next Prayer Highlight -->
+        <div class="next-prayer-card">
+          <div class="np-left">
+            <p class="np-label">Sholat Berikutnya</p>
+            <h3 class="np-name" id="next-prayer-name">—</h3>
+            <div class="np-countdown" id="home-countdown">--:--:--</div>
+          </div>
+          <div class="np-right">
+            <p class="np-time" id="next-prayer-time">--:--</p>
+            <div class="np-progress-wrap">
+              <div class="np-progress-bar" id="np-progress-bar"></div>
+            </div>
+            <p class="np-progress-label" id="np-progress-label">—</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUICK NAV -->
+      <div class="home-quick-nav">
+        <button class="quick-nav-btn" data-page="sholat"><span class="qnav-icon">🕌</span><span>Sholat</span></button>
+        <button class="quick-nav-btn" data-page="kiblat"><span class="qnav-icon">🧭</span><span>Kiblat</span></button>
+        <button class="quick-nav-btn" data-page="tasbih"><span class="qnav-icon">📿</span><span>Tasbih</span></button>
+        <button class="quick-nav-btn" data-page="dzikir"><span class="qnav-icon">📖</span><span>Dzikir</span></button>
+        <button class="quick-nav-btn" data-page="doa"><span class="qnav-icon">🤲</span><span>Doa</span></button>
+        <button class="quick-nav-btn" data-page="kalender"><span class="qnav-icon">📅</span><span>Kalender</span></button>
+        <button class="quick-nav-btn" data-page="hadis"><span class="qnav-icon">💬</span><span>Hadis</span></button>
+        <button class="quick-nav-btn" data-page="asmaul"><span class="qnav-icon">✨</span><span>Asmaul Husna</span></button>
+        <button class="quick-nav-btn quran-nav-btn" data-page="quran"><span class="qnav-icon">📗</span><span>Al-Qur'an</span><span class="qnav-badge">Segera</span></button>
+        <button class="quick-nav-btn" data-page="pengaturan"><span class="qnav-icon">⚙️</span><span>Pengaturan</span></button>
+      </div>
+
+      <!-- INSPIRASI HARIAN: 3 CARDS -->
+      <div class="home-section">
+        <div class="section-header">
+          <h3 class="section-title">✨ Inspirasi Hari Ini</h3>
+          <div class="inspiration-tabs">
+            <button class="insp-tab active" data-tab="ayat">Ayat</button>
+            <button class="insp-tab" data-tab="hadits">Hadits</button>
+            <button class="insp-tab" data-tab="doa-harian">Doa</button>
+          </div>
+        </div>
+
+        <!-- Ayat Tab -->
+        <div class="insp-panel active" id="insp-ayat">
+          <div class="insp-card insp-card--ayat">
+            <div class="insp-card-header">
+              <span class="insp-tag insp-tag--green">Al-Qur'an</span>
+              <div class="insp-actions">
+                <button class="insp-action-btn" id="ayat-bookmark-btn" title="Simpan">🔖</button>
+                <button class="insp-action-btn" id="ayat-share-btn" title="Share">↗</button>
+              </div>
+            </div>
+            <p class="insp-arabic" id="ayat-arabic">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
+            <p class="insp-terjemahan" id="ayat-terjemahan">Memuat ayat hari ini...</p>
+            <div class="insp-meta">
+              <span class="insp-source" id="ayat-surat">—</span>
+              <span class="insp-badge" id="ayat-nomor">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hadits Tab -->
+        <div class="insp-panel" id="insp-hadits">
+          <div class="insp-card insp-card--gold">
+            <div class="insp-card-header">
+              <span class="insp-tag insp-tag--gold">Hadits</span>
+              <button class="insp-action-btn" id="hadits-bookmark-btn" title="Simpan">🔖</button>
+            </div>
+            <p class="insp-arabic" id="hadits-harian-arabic">—</p>
+            <p class="insp-terjemahan" id="hadits-harian-text">Memuat hadits hari ini...</p>
+            <div class="insp-meta">
+              <span class="insp-source" id="hadits-harian-source">—</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Doa Harian Tab -->
+        <div class="insp-panel" id="insp-doa-harian">
+          <div class="insp-card insp-card--blue">
+            <div class="insp-card-header">
+              <span class="insp-tag insp-tag--blue">Doa Harian</span>
+            </div>
+            <p class="insp-doa-waktu" id="doa-harian-waktu">—</p>
+            <p class="insp-arabic" id="doa-harian-arabic">—</p>
+            <p class="insp-latin" id="doa-harian-latin">—</p>
+            <p class="insp-terjemahan" id="doa-harian-text">—</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- STREAK & PROGRESS -->
+      <div class="home-section">
+        <div class="section-header">
+          <h3 class="section-title">🔥 Streak & Progress</h3>
+          <button class="text-btn" data-page="statistik">Detail →</button>
+        </div>
+
+        <!-- Streak Circles -->
+        <div class="streak-circles-row">
+          <div class="streak-circle-item" data-id="sholat">
+            <div class="streak-circle" id="streak-circle-sholat">
+              <svg viewBox="0 0 60 60"><circle class="sc-bg" cx="30" cy="30" r="24"/><circle class="sc-fill" id="scf-sholat" cx="30" cy="30" r="24"/></svg>
+              <span class="sc-icon">🕌</span>
+            </div>
+            <span class="sc-label">Sholat</span>
+            <span class="sc-days" id="streak-days-sholat">0 hari</span>
+            <button class="sc-check-btn" id="sc-btn-sholat">+</button>
+          </div>
+          <div class="streak-circle-item" data-id="quran">
+            <div class="streak-circle" id="streak-circle-quran">
+              <svg viewBox="0 0 60 60"><circle class="sc-bg" cx="30" cy="30" r="24"/><circle class="sc-fill" id="scf-quran" cx="30" cy="30" r="24"/></svg>
+              <span class="sc-icon">📖</span>
+            </div>
+            <span class="sc-label">Qur'an</span>
+            <span class="sc-days" id="streak-days-quran">0 hari</span>
+            <button class="sc-check-btn" id="sc-btn-quran">+</button>
+          </div>
+          <div class="streak-circle-item" data-id="dzikir">
+            <div class="streak-circle" id="streak-circle-dzikir">
+              <svg viewBox="0 0 60 60"><circle class="sc-bg" cx="30" cy="30" r="24"/><circle class="sc-fill" id="scf-dzikir" cx="30" cy="30" r="24"/></svg>
+              <span class="sc-icon">📿</span>
+            </div>
+            <span class="sc-label">Dzikir</span>
+            <span class="sc-days" id="streak-days-dzikir">0 hari</span>
+            <button class="sc-check-btn" id="sc-btn-dzikir">+</button>
+          </div>
+        </div>
+
+        <!-- Khatam Progress -->
+        <div class="khatam-card">
+          <div class="khatam-top">
+            <div>
+              <p class="khatam-label">Progress Khatam Al-Qur'an</p>
+              <p class="khatam-count"><span id="khatam-juz-done">0</span> / 30 Juz</p>
+            </div>
+            <span class="khatam-pct" id="khatam-pct">0%</span>
+          </div>
+          <div class="khatam-bar-wrap"><div class="khatam-bar-fill" id="khatam-bar"></div></div>
+          <div class="khatam-juz-grid" id="khatam-juz-grid"></div>
+          <div class="khatam-actions">
+            <button class="btn-primary khatam-add-btn" id="khatam-add">+ Tambah Juz Selesai</button>
+            <button class="btn-secondary" id="khatam-reset">Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- EVENT ISLAM -->
+      <div class="home-section">
+        <div class="section-header">
+          <h3 class="section-title">🌙 Event Islam Mendatang</h3>
+          <button class="text-btn" data-page="kalender">Semua →</button>
+        </div>
+        <div id="home-events-list" class="events-list"></div>
+      </div>
+
+    </section><!-- /page-home -->
+
+    <!-- ===================================================== -->
+    <!-- SHOLAT PAGE -->
+    <!-- ===================================================== -->
+    <section id="page-sholat" class="page">
+      <div class="page-header">
+        <h2 class="page-title">Jadwal Sholat</h2>
+        <p class="page-subtitle" id="sholat-location">📍 Mendeteksi lokasi...</p>
+      </div>
+      <div class="hijri-date-card"><span class="hijri-label">Hari ini</span><span class="hijri-date" id="hijri-date">—</span></div>
+      <div id="loading-sholat" class="loading-state"><div class="spinner"></div><p>Mengambil waktu sholat...</p></div>
+      <div id="error-sholat" class="error-state hidden">
+        <span class="error-icon">⚠️</span>
+        <p id="error-sholat-msg">Gagal mengambil data sholat</p>
+        <button id="retry-sholat" class="btn-primary">Coba Lagi</button>
+      </div>
+      <div id="sholat-list" class="sholat-list hidden"></div>
+      <div class="countdown-section hidden" id="sholat-countdown-section">
+        <div class="countdown-card">
+          <p class="countdown-card-label">Menuju <span id="sholat-next-name">—</span></p>
+          <div class="countdown-big" id="sholat-countdown">--:--:--</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- KIBLAT PAGE -->
+    <!-- ===================================================== -->
+    <section id="page-kiblat" class="page">
+      <div class="page-header"><h2 class="page-title">Arah Kiblat</h2><p class="page-subtitle">Kompas menuju Ka'bah</p></div>
+      <div id="kiblat-permission" class="permission-state">
+        <div class="permission-icon">🧭</div>
+        <p>Izinkan akses kompas dan lokasi untuk menentukan arah kiblat</p>
+        <button id="start-kiblat" class="btn-primary">Aktifkan Kompas</button>
+      </div>
+      <div id="kiblat-main" class="kiblat-main hidden">
+        <div class="compass-container">
+          <div class="compass-ring">
+            <div class="compass-face" id="compass-face">
+              <div class="compass-north">N</div><div class="compass-south">S</div>
+              <div class="compass-east">E</div><div class="compass-west">W</div>
+              <div class="compass-needle-wrap" id="compass-needle-wrap">
+                <div class="compass-needle"><div class="needle-north"></div><div class="needle-south"></div></div>
+              </div>
+              <div class="kiblat-arrow-wrap" id="kiblat-arrow-wrap"><div class="kiblat-arrow">☪</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="kiblat-info">
+          <div class="kiblat-degree-card"><span class="degree-label">Arah Kiblat</span><span class="degree-value" id="kiblat-degree">—°</span></div>
+          <div class="kiblat-degree-card"><span class="degree-label">Jarak Ka'bah</span><span class="degree-value" id="kiblat-distance">—</span></div>
+        </div>
+        <p class="kiblat-hint" id="kiblat-hint">Arahkan perangkat mendatar dan ikuti panah ☪ menuju kiblat</p>
+      </div>
+      <div id="kiblat-error" class="error-state hidden">
+        <span class="error-icon">⚠️</span><p id="kiblat-error-msg">Sensor tidak tersedia</p>
+        <button id="retry-kiblat" class="btn-primary">Coba Lagi</button>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- TASBIH PAGE -->
+    <!-- ===================================================== -->
+    <section id="page-tasbih" class="page">
+      <div class="page-header"><h2 class="page-title">Tasbih Digital</h2><p class="page-subtitle">Dzikir dengan hitungan</p></div>
+      <div class="tasbih-container">
+        <div class="tasbih-selector">
+          <button class="dzikir-chip active" data-dzikir="subhanallah" data-max="33">سُبْحَانَ اللّهِ<br><small>33x</small></button>
+          <button class="dzikir-chip" data-dzikir="alhamdulillah" data-max="33">اَلْحَمْدُ لِلّهِ<br><small>33x</small></button>
+          <button class="dzikir-chip" data-dzikir="allahuakbar" data-max="34">اَللّهُ أَكْبَرُ<br><small>34x</small></button>
+          <button class="dzikir-chip" data-dzikir="tahlil" data-max="100">لَا إِلَهَ إِلَّا اللَّه<br><small>100x</small></button>
+          <button class="dzikir-chip" data-dzikir="istighfar" data-max="100">أَسْتَغْفِرُ اللَّه<br><small>100x</small></button>
+          <button class="dzikir-chip" data-dzikir="sholawat" data-max="100">اللّهُمَّ صَلِّ عَلَى<br><small>100x</small></button>
+          <button class="dzikir-chip" data-dzikir="custom" data-max="100">Custom<br><small>100x</small></button>
+        </div>
+        <div class="tasbih-display">
+          <div class="tasbih-ring">
+            <svg class="tasbih-progress-svg" viewBox="0 0 200 200">
+              <circle class="progress-bg" cx="100" cy="100" r="88" />
+              <circle class="progress-fill" id="tasbih-progress-circle" cx="100" cy="100" r="88" />
+            </svg>
+            <div class="tasbih-count-wrap">
+              <span class="tasbih-count" id="tasbih-count">0</span>
+              <span class="tasbih-target" id="tasbih-target">/ 33</span>
+            </div>
+          </div>
+        </div>
+        <div class="tasbih-arabic" id="tasbih-arabic">سُبْحَانَ اللّهِ</div>
+        <div class="tasbih-translation" id="tasbih-translation">Maha Suci Allah</div>
+        <div class="tasbih-rounds">
+          <span>Putaran: <strong id="tasbih-rounds">0</strong></span>
+          <span>Total: <strong id="tasbih-total">0</strong></span>
+        </div>
+        <button class="tasbih-btn" id="tasbih-btn" aria-label="Tambah hitungan"><span class="tasbih-btn-icon">📿</span></button>
+        <div class="tasbih-actions">
+          <button class="btn-secondary" id="tasbih-reset">Reset</button>
+          <button class="btn-secondary" id="tasbih-save">Simpan</button>
+        </div>
+        <div class="tasbih-history" id="tasbih-history"></div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- DZIKIR PAGE -->
+    <!-- ===================================================== -->
+    <section id="page-dzikir" class="page">
+      <div class="page-header"><h2 class="page-title">Dzikir Harian</h2><p class="page-subtitle">Pagi & Petang</p></div>
+      <div class="dzikir-tabs">
+        <button class="tab-btn active" data-tab="pagi">🌅 Pagi</button>
+        <button class="tab-btn" data-tab="petang">🌆 Petang</button>
+      </div>
+      <div class="dzikir-progress-bar">
+        <div class="dzikir-progress-fill" id="dzikir-progress-fill"></div>
+        <span class="dzikir-progress-text" id="dzikir-progress-text">0/0</span>
+      </div>
+      <div class="dzikir-actions-top"><button class="btn-text" id="dzikir-reset-all">Reset Semua</button></div>
+      <div id="dzikir-list" class="dzikir-list"></div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- DOA HARIAN PAGE -->
+    <!-- ===================================================== -->
+    <section id="page-doa" class="page">
+      <div class="page-header"><h2 class="page-title">Doa Harian</h2><p class="page-subtitle">Kumpulan doa sehari-hari</p></div>
+      <div class="doa-search-wrap">
+        <input type="text" id="doa-search" class="doa-search" placeholder="🔍  Cari doa..." />
+      </div>
+      <div class="doa-category-tabs" id="doa-category-tabs"></div>
+      <div id="doa-list" class="doa-list"></div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- KALENDER PAGE -->
+    <!-- ===================================================== -->
+    <section id="page-kalender" class="page">
+      <div class="page-header"><h2 class="page-title">Kalender Islam</h2><p class="page-subtitle">Tanggal Hijriyah & Event</p></div>
+      <div class="kalender-today">
+        <div class="kalender-hijri-big">
+          <p class="kh-label">Hari ini dalam Hijriyah</p>
+          <h2 class="kh-date" id="kal-hijri-date">—</h2>
+          <p class="kh-month" id="kal-hijri-month">—</p>
+        </div>
+        <div class="kalender-masehi"><p id="kal-masehi-date">—</p></div>
+      </div>
+      <div class="kalender-events">
+        <h3 class="section-title">Event Islam 1447 H</h3>
+        <div id="kal-events-list" class="kal-events-list"></div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- HADIS PAGE -->
+    <!-- ===================================================== -->
+    <section id="page-hadis" class="page">
+      <div class="page-header"><h2 class="page-title">Hadis Harian</h2><p class="page-subtitle">Hadis pilihan setiap hari</p></div>
+      <div class="hadis-featured" id="hadis-featured">
+        <div class="hadis-number" id="hadis-num">#1</div>
+        <p class="hadis-arabic" id="hadis-arabic"></p>
+        <p class="hadis-text" id="hadis-text">Loading...</p>
+        <div class="hadis-meta">
+          <span class="hadis-source" id="hadis-source-full">—</span>
+          <button class="bookmark-btn" id="hadis-bookmark" aria-label="Bookmark hadis">🔖</button>
+        </div>
+        <div class="hadis-nav">
+          <button class="btn-secondary" id="hadis-prev">← Sebelumnya</button>
+          <button class="btn-secondary" id="hadis-next">Berikutnya →</button>
+        </div>
+      </div>
+      <div class="hadis-bookmarks" id="hadis-bookmarks-section">
+        <h3 class="section-title">Hadis Tersimpan</h3>
+        <div id="hadis-bookmarks-list" class="hadis-bookmarks-list"></div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- ASMAUL HUSNA PAGE -->
+    <!-- ===================================================== -->
+    <section id="page-asmaul" class="page">
+      <div class="page-header"><h2 class="page-title">Asmaul Husna</h2><p class="page-subtitle">99 Nama Allah Yang Mulia</p></div>
+      <div class="asmaul-progress-bar-wrap">
+        <div class="asmaul-progress-bar-fill" id="asmaul-progress-bar"></div>
+        <span class="asmaul-progress-text" id="asmaul-progress-text">0 / 99 dihafal</span>
+      </div>
+      <div id="asmaul-list" class="asmaul-list"></div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- STATISTIK PAGE -->
+    <!-- ===================================================== -->
+    <section id="page-statistik" class="page">
+      <div class="page-header"><h2 class="page-title">Statistik Ibadah</h2><p class="page-subtitle">Pantau perkembangan ibadah harian</p></div>
+      <div class="statistik-wrap" id="statistik-wrap"></div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- QURAN PAGE (placeholder) -->
+    <!-- ===================================================== -->
+    <section id="page-quran" class="page">
+      <div class="quran-coming-soon-wrap">
+        <div class="quran-coming-soon-card">
+          <div class="quran-icon-ring"><span class="quran-icon">📗</span></div>
+          <h2 class="quran-title">Al-Qur'an</h2>
+          <p class="quran-arabic-label">القرآن الكريم</p>
+          <div class="quran-divider"></div>
+          <p class="quran-message">Mohon maaf, fitur Al-Qur'an sedang dalam tahap pengembangan intensif. Insya Allah segera hadir dengan tampilan mushaf lengkap, audio murottal, dan tafsir.</p>
+          <div class="quran-dots"><span></span><span></span><span></span></div>
+          <button class="btn-primary quran-back-btn" data-page="home">← Kembali ke Beranda</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <!-- PENGATURAN PAGE -->
+    <!-- ===================================================== -->
+    <section id="page-pengaturan" class="page">
+      <div class="page-header"><h2 class="page-title">Pengaturan</h2><p class="page-subtitle">Konfigurasi aplikasi</p></div>
+
+      <div class="settings-wrap">
+
+        <!-- Profil -->
+        <div class="settings-section">
+          <h3 class="settings-section-title">👤 Profil</h3>
+          <div class="settings-card">
+            <div class="settings-row">
+              <div class="settings-row-label">
+                <span class="sr-icon">👤</span>
+                <div><span class="sr-title">Nama</span><span class="sr-sub">Untuk salam di beranda</span></div>
+              </div>
+              <input type="text" id="user-name-input" class="settings-input" placeholder="Masukkan nama..." maxlength="30" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Tampilan -->
+        <div class="settings-section">
+          <h3 class="settings-section-title">🎨 Tampilan</h3>
+          <div class="settings-card">
+            <div class="settings-row settings-row--toggle">
+              <div class="settings-row-label">
+                <span class="sr-icon">🌙</span>
+                <div><span class="sr-title">Mode Gelap</span><span class="sr-sub">Tampilan dark / light</span></div>
+              </div>
+              <button class="toggle-btn" id="settings-theme-toggle">
+                <span class="toggle-knob"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data -->
+        <div class="settings-section">
+          <h3 class="settings-section-title">💾 Data & Privasi</h3>
+          <div class="settings-card">
+            <div class="settings-row settings-row--btn" id="settings-reset-khatam">
+              <div class="settings-row-label">
+                <span class="sr-icon">🗑️</span>
+                <div><span class="sr-title">Reset Progress Khatam</span><span class="sr-sub">Hapus semua data khatam</span></div>
+              </div>
+              <span class="sr-arrow">→</span>
+            </div>
+            <div class="settings-row settings-row--btn" id="settings-reset-streak">
+              <div class="settings-row-label">
+                <span class="sr-icon">🔥</span>
+                <div><span class="sr-title">Reset Streak Ibadah</span><span class="sr-sub">Hapus semua data streak</span></div>
+              </div>
+              <span class="sr-arrow">→</span>
+            </div>
+            <div class="settings-row settings-row--btn danger" id="settings-reset-all">
+              <div class="settings-row-label">
+                <span class="sr-icon">⚠️</span>
+                <div><span class="sr-title">Hapus Semua Data</span><span class="sr-sub">Factory reset aplikasi</span></div>
+              </div>
+              <span class="sr-arrow">→</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tentang -->
+        <div class="settings-section">
+          <h3 class="settings-section-title">ℹ️ Tentang</h3>
+          <div class="settings-card">
+            <div class="settings-row">
+              <div class="settings-row-label">
+                <span class="sr-icon">📱</span>
+                <div><span class="sr-title">Muslim Daily</span><span class="sr-sub">Versi 4.0 — Toolkit Islami Harian</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-primary settings-back-btn" data-page="home">← Kembali ke Beranda</button>
+      </div>
+    </section>
+
+  </main><!-- /pages-container -->
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-page="home"><span class="nav-icon">🏠</span><span class="nav-label">Home</span></button>
+    <button class="nav-btn" data-page="sholat"><span class="nav-icon">🕌</span><span class="nav-label">Sholat</span></button>
+    <button class="nav-btn" data-page="kiblat"><span class="nav-icon">🧭</span><span class="nav-label">Kiblat</span></button>
+    <button class="nav-btn" data-page="tasbih"><span class="nav-icon">📿</span><span class="nav-label">Tasbih</span></button>
+    <button class="nav-btn" data-page="dzikir"><span class="nav-icon">📖</span><span class="nav-label">Dzikir</span></button>
+  </nav>
+
+</div><!-- /app -->
+
+<div id="toast" class="toast" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>
